@@ -1,13 +1,12 @@
 from fastapi import Depends, HTTPException, status, Cookie, Response
 from datetime import datetime, timedelta, timezone
-from src.view.user import UserPayload
-from src.view.token import SessionToken, Token
+from src.schemas.user import UserPayload
+from src.schemas.token import SessionToken, Token
 from src.constants import Constants
 from passlib.context import CryptContext
 from src.exceptions import DatabaseError
 from typing import Optional
 from asyncpg import Pool
-from asyncpg.connection import Connection
 from src.db.db import get_db_pool
 from src import util
 import uuid
@@ -138,7 +137,7 @@ async def extract_payload_optional(access_token: Optional[str] = Cookie(default=
 async def get_rls_connection(
     pool: Pool = Depends(get_db_pool),
     user_payload: Optional[UserPayload] = Depends(extract_payload_optional)
-) -> Connection:
+):
     async with pool.acquire() as connection:
         async with connection.transaction():
             try:
@@ -162,8 +161,7 @@ async def get_rls_connection(
 
 
 def require_user(payload: Optional[UserPayload] = Depends(extract_payload_optional)) -> UserPayload:
-    if payload is None:
-        raise CREDENTIALS_EXCEPTION
+    if payload is None: raise CREDENTIALS_EXCEPTION
     return payload
 
 

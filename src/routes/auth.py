@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status, Response
-from src.view.auth import LoginRequest
-from src.view.user import UserResponse
+from src.schemas.auth import LoginRequest
+from src.schemas.user import UserResponse
 from src.db.db import get_db_pool
 from src.controller import auth
 from asyncpg import Pool

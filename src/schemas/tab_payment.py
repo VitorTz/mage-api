@@ -1,9 +1,9 @@
+from pydantic import BaseModel, Field, ConfigDict
+from src.schemas.enums import PaymentMethod
 from typing import Optional
-from uuid import UUID
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict
-from src.view.enums import PaymentMethod
+from uuid import UUID
 
 
 class TabPaymentBase(BaseModel):

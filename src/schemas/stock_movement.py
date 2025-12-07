@@ -1,9 +1,9 @@
-from typing import Optional
-from uuid import UUID
+from pydantic import BaseModel, Field, ConfigDict, model_validator
+from src.schemas.enums import StockMovementType
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict, model_validator
-from src.view.enums import StockMovementType
+from typing import Optional
+from uuid import UUID
 
 
 class StockMovementBase(BaseModel):

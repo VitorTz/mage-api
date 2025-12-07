@@ -1,7 +1,7 @@
-from typing import Optional
-from uuid import UUID
-from decimal import Decimal
 from pydantic import BaseModel, Field, ConfigDict
+from typing import Optional
+from decimal import Decimal
+from uuid import UUID
 
 
 class SaleItemBase(BaseModel):

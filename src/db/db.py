@@ -1,6 +1,5 @@
-from fastapi import status, Depends
 from fastapi.exceptions import HTTPException
-from asyncpg import Connection
+from fastapi import status
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import TypeVar, Awaitable, Optional
@@ -34,20 +33,17 @@ class Database:
         try:
             self.pool = await asyncpg.create_pool(
                 dsn=os.getenv("DATABASE_URL"),
-                min_size=1, # Mantém pelo menos 1 conexão viva
-                max_size=10, # Ajuste conforme seu plano no Supabase
+                min_size=1,
+                max_size=10,
                 command_timeout=60,
-                # Supabase em Transaction Mode (Porta 6543) EXIGE statement_cache_size=0
                 statement_cache_size=0 
             )
-            
-            # Validação inicial da conexão
+                    
             async with self.pool.acquire() as conn:
                 version = await conn.fetchval("SELECT version()")
                 print(f"Conectado ao Postgres: {version}")
                 
-                # Migração
-                # Usar Alembic ou dbmate em produção
+                # Migração [Alembic ou dbmate em produção]
                 await self.execute_sql_file(Path("db/schema.sql"), conn)
                 await self.execute_sql_file(Path("db/views.sql"), conn)
                 await self.execute_sql_file(Path("db/insertions.sql"), conn)

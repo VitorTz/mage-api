@@ -1,9 +1,9 @@
-from typing import Optional
-from uuid import UUID
-from datetime import datetime
-from decimal import Decimal
 from pydantic import BaseModel, Field, ConfigDict, model_validator
-from src.view.enums import MeasureUnit
+from src.schemas.enums import MeasureUnit
+from datetime import datetime
+from typing import Optional
+from decimal import Decimal
+from uuid import UUID
 
 
 class ProductBase(BaseModel):

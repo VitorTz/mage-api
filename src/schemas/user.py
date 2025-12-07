@@ -1,9 +1,16 @@
+from pydantic import (
+    BaseModel, 
+    Field, 
+    ConfigDict, 
+    model_validator, 
+    EmailStr, 
+    field_validator
+)
+from src.schemas.enums import UserRole
 from typing import Optional
-from uuid import UUID
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict, model_validator, EmailStr, field_validator
-from src.view.enums import UserRole
+from uuid import UUID
 import re
 
 class UserPayload(BaseModel):

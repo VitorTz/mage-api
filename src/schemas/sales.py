@@ -1,9 +1,9 @@
+from pydantic import BaseModel, Field, ConfigDict, model_validator
+from src.schemas.enums import SaleStatus
 from typing import Optional
-from uuid import UUID
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict, model_validator
-from src.view.enums import SaleStatus
+from uuid import UUID
 
 
 class SaleBase(BaseModel):

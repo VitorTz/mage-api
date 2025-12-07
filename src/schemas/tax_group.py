@@ -1,7 +1,8 @@
-from typing import Optional
-from uuid import UUID
-from decimal import Decimal
 from pydantic import BaseModel, Field, ConfigDict
+from typing import Optional
+from decimal import Decimal
+from uuid import UUID
+
 
 class TaxGroupBase(BaseModel):
     description: str = Field(
@@ -23,10 +24,7 @@ class TaxGroupBase(BaseModel):
         max_length=2,
         description="CST para PIS/COFINS (ex: 04 = Monofásico com alíquota zero)"
     )
-    
-    # Usamos Decimal para garantir precisão financeira (NUMERIC 5,2)
-    # ge=0 garante que a taxa não seja negativa
-    # lt=1000 garante que caiba no (5,2) do banco (max 999.99)
+        
     icms_rate: Decimal = Field(
         default=Decimal('0.00'), 
         ge=0, 

@@ -1,15 +1,12 @@
 from fastapi import status, Response
-from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
-from src.view.auth import LoginRequest
-from src.view.token import SessionToken
-from src.view.user import UserLoginData, UserResponse
+from src.schemas.auth import LoginRequest
+from src.schemas.user import UserLoginData, UserResponse
 from src.model import user as user_model
 from src.model import refresh_token as refresh_token_model
-from src.exceptions import DatabaseError
-from src.security import verify_password, create_session_token, set_session_token_cookie
 from typing import Optional
 from asyncpg import Connection
+from src import security
 
 
 INVALID_CREDENTIALS = HTTPException(
@@ -31,7 +28,7 @@ async def login(
     if not data:
         raise INVALID_CREDENTIALS
     
-    if not verify_password(login_req.password, data.password_hash):
+    if not security.verify_password(login_req.password, data.password_hash):
         raise INVALID_CREDENTIALS
         
     if data.role == "CLIENTE":
@@ -40,7 +37,7 @@ async def login(
             detail="Acesso não permitido para perfil Cliente."
         )
         
-    session_token = create_session_token(data.id, data.role)
+    session_token = security.create_session_token(data.id, data.role)
         
     await refresh_token_model.create_refresh_token(
         session_token.refresh_token.id,
@@ -48,7 +45,7 @@ async def login(
         conn
     )
         
-    set_session_token_cookie(response, session_token)
+    security.set_session_token_cookie(response, session_token)
         
     return UserResponse(
         id=data.id,

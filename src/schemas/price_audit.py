@@ -1,8 +1,8 @@
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional
-from uuid import UUID
 from datetime import datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict
+from uuid import UUID
 
 
 class PriceAuditBase(BaseModel):

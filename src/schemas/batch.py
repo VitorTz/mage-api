@@ -1,8 +1,8 @@
+from pydantic import BaseModel, Field, ConfigDict, computed_field
 from typing import Optional
-from uuid import UUID
 from datetime import date, datetime
 from decimal import Decimal
-from pydantic import BaseModel, Field, ConfigDict, computed_field
+from uuid import UUID
 
 
 class BatchBase(BaseModel):

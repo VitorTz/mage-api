@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class PaymentMethod(str, Enum):
     DINHEIRO = 'DINHEIRO'
     CREDITO = 'CREDITO'
@@ -9,6 +10,7 @@ class PaymentMethod(str, Enum):
     FIADO_PAGO_PARCIAL = 'FIADO-PAGO-PARCIAL'
     FIADO_QUITADO = 'FIADO-QUITADO'
     VALE_ALIMENTACAO = 'VALE_ALIMENTACAO'
+
 
 class StockMovementType(str, Enum):
     VENDA = 'VENDA'
@@ -20,6 +22,7 @@ class StockMovementType(str, Enum):
     CONSUMO_INTERNO = 'CONSUMO_INTERNO'
     CANCELAMENTO = 'CANCELAMENTO'
 
+
 class UserRole(str, Enum):
     ADMIN = 'ADMIN'
     CAIXA = 'CAIXA'
@@ -28,11 +31,13 @@ class UserRole(str, Enum):
     ESTOQUISTA = 'ESTOQUISTA'
     CONTADOR = 'CONTADOR'
 
+
 class SaleStatus(str, Enum):
     ABERTA = 'ABERTA'
     CONCLUIDA = 'CONCLUIDA'
     CANCELADA = 'CANCELADA'
     EM_ENTREGA = 'EM_ENTREGA'
+
 
 class MeasureUnit(str, Enum):
     UN = 'UN'

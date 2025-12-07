@@ -1,4 +1,4 @@
-from src.view.user import UserLoginData
+from src.schemas.user import UserLoginData
 from asyncpg import Connection
 from typing import Optional
 import re
